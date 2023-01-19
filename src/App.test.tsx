@@ -1,7 +1,14 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App, { ImportantForm } from './App';
-import { BrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <ImportantForm />,
+  },
+]);
 
 test('renders learn react link', () => {
   render(<App />);
@@ -10,7 +17,7 @@ test('renders learn react link', () => {
 });
 
 test('renders learn react link', () => {
-  render(<ImportantForm />,  {wrapper: BrowserRouter});
+  render(<RouterProvider router={router} />);
   const paragraph = screen.getByText(/Is the form dirty/i);
   expect(paragraph).toBeInTheDocument();
 });
